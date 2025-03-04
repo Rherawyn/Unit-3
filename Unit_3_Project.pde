@@ -12,6 +12,7 @@ color royalblue  = #5A1FFF;
 color velvet     = #684FFC;
 color blue       = #364BFF;
 color selected   = #5A5A5A;
+color selectedcolor;
 
 //variable for color selection
 float sliderR;
@@ -25,11 +26,15 @@ float memoryB;
 float memoryG;
 float memoryR;
 float thickstroke;
-color selectedcolor;
+boolean pg1;
+boolean pg2;
+boolean pg3;
+boolean pg4;
+boolean pg5;
 
 void setup() {
   size(1200, 800);
-  stroke(darkpurple);
+  stroke(0);
   strokeWeight(5);
   selectedcolor = purple;
   sliderB = 450;
@@ -43,6 +48,11 @@ void setup() {
   memoryR = 0;
   memoryG = 0;
   memoryB = 0;
+  pg1 = false;
+  pg2 = false;
+  pg3 = false;
+  pg4 = false;
+  pg5 = false;
   fill(255);
   rect(0, 0, 1200, 800);
 }
@@ -67,35 +77,90 @@ void draw() {
   
   //buttons
   
-  tactile(100,100,50);
+  tactile(125,690,25);
   fill(magenta);
-  circle(100,100,100);
+  circle(125,690,50);
   
-  tactile(100,300,50); 
+  tactile(200,690,25); 
   fill(violet);
-  circle(100,300,100);
+  circle(200,690,50);
 
-  tactile(100, 500, 50);  
+  tactile(275,690,25);  
   fill(purple);
-  circle(100,500,100);
+  circle(275,690,50);
   
-  //rect buttons
+  tactile(350,690,25);  
+  fill(purple);
+  circle(350,690,50);
+  
+  tactile(125,760,25);  
+  fill(purple);
+  circle(125,760,50);
+  
+  tactile(200,760,25);  
+  fill(purple);
+  circle(200,760,50);
+  
+  tactile(275,760,25);  
+  fill(purple);
+  circle(275,760,50);
+  
+  tactile(350,760,25);  
+  fill(purple);
+  circle(350,760,50);
+  
+  //menu buttons=============================
   rectangle(925,1000,675,720);
   fill(memoryR, memoryG, memoryB);
   rect(925,675,75,45);
-  println(shadeR, shadeG, shadeB);
+  //println(shadeR, shadeG, shadeB);
   
   rectangle(925,1000,730,770); 
   fill(255);
   rect(925,730,75,45);
 
-  rectangle(800,950,450,550);  
-  fill(blue);
-  rect(1025,675,75,45);
+  rectangle(1015,1090,675,710);  
+  fill(shadeR, shadeG, shadeB);
+  rect(1015,675,75,45);
   
-  rectangle(800,950,450,550);  
-  fill(blue);
-  rect(1025,730,75,45);
+  rectangle(1015,1090,730,775);  
+  fill(255, 18, 93);
+  rect(1015,730,75,45);
+  
+  rectangle(1110,1185,675,710);  
+  fill(3, 255, 88);
+  rect(1110,675,75,45);
+  
+  rectangle(1110,1185,730,775);  
+  fill(3, 255, 206);
+  rect(1110,730,75,45);
+  //end of menu buttons==========================
+  
+  //programable buttons===================================
+  rectangle(100,175,20,80); 
+  fill(255);
+  rect(100,20,75,60);
+  
+  rectangle(200,275,20,80); 
+  fill(255);
+  rect(200,20,75,60);
+  
+  rectangle(300,375,20,80); 
+  fill(255);
+  rect(300,20,75,60);
+  
+  rectangle(400,475,20,80); 
+  fill(255);
+  rect(400,20,75,60);
+  
+  rectangle(500,575,20,80); 
+  fill(255);
+  rect(500,20,75,60);
+  //end ofprogramable buttons===================================
+  
+  //devider line============
+  line(600, 15, 600, 85);
+  //end of devider line============
   
   //color indicator
   stroke(0);
@@ -142,9 +207,18 @@ void draw() {
   
   fill(0);
   textSize(17);
-  text("ERASE", 941, 756);
+  text("ERASE", 940, 758);
+  text("SAVE", 1130, 704);
+  text("LOAD", 1128, 758);
   fill(255);
   text("DRAW", 941, 704);
+  text("FILL", 1038, 704);
+  text("RESET", 1030, 758);
+  textSize(15);
+  fill(0);
+  text(shadeR, 387, 677);
+  text(shadeG, 387, 727);
+  text(shadeB, 387, 777);
  
 } // end of draw ================================================
 
@@ -153,7 +227,7 @@ void tactile(int x, int y, int r) {
   if (dist(x,y,mouseX,mouseY) < r) {
    stroke(selected);
   } else {
-   stroke(darkpurple); 
+   stroke(0); 
   }
 }// end of tactile ================================================
 
@@ -168,18 +242,41 @@ void rectangle(int a, int b, int c, int d) {
 
 //mouse click ====================================================
 void mouseReleased() {
-  if (dist(100,100,mouseX,mouseY) < 50) {
+  
+ //circle buttons
+  if (dist(125,690,mouseX,mouseY) < 50) {
     selectedcolor = magenta;
   }
   
-  if (dist(100,300,mouseX,mouseY) < 50) {
+  if (dist(200,690,mouseX,mouseY) < 50) {
     selectedcolor = violet;
   }
   
-  if (dist(100,500,mouseX,mouseY) < 50) {
+  if (dist(275,690,mouseX,mouseY) < 50) {
     selectedcolor = purple;
   }
   
+  if (dist(350,690,mouseX,mouseY) < 50) {
+    selectedcolor = purple;
+  }
+  
+  if (dist(125,760,mouseX,mouseY) < 50) {
+    selectedcolor = magenta;
+  }
+  
+  if (dist(200,760,mouseX,mouseY) < 50) {
+    selectedcolor = violet;
+  }
+  
+  if (dist(275,760,mouseX,mouseY) < 50) {
+    selectedcolor = purple;
+  }
+  
+  if (dist(350,760,mouseX,mouseY) < 50) {
+    selectedcolor = purple;
+  } // end of circle buttons
+  
+  //menu buttons=========================================================
   if (mouseX > 925 && mouseX < 1000 && mouseY > 675 && mouseY < 720) {
    sliderR = map(memoryR, 0, 255, 450, 750);
    sliderG = map(memoryG, 0, 255, 450, 750);
@@ -196,10 +293,66 @@ void mouseReleased() {
      sliderB = map(255, 0, 255, 450, 750);
     }
   }
-  
-  if (mouseX > 800 && mouseX < 950 && mouseY > 450 && mouseY < 550) {
-   selectedcolor = blue;
+
+  if (mouseX > 1015 && mouseX < 1090 && mouseY > 675 && mouseY < 710) {
+   fill(shadeR, shadeG, shadeB);
+   rect(80, 100, 1040, 550);
   }
+  
+  if (mouseX > 1015 && mouseX < 1090 && mouseY > 730 && mouseY < 775) {
+   fill(255);
+   rect(80, 100, 1040, 550);
+  }
+  
+  if (mouseX > 1110 && mouseX < 1185 && mouseY > 675 && mouseY < 710) {
+    //
+  }
+  
+  if (mouseX > 1110 && mouseX < 1185 && mouseY > 730 && mouseY < 775) {
+   //
+  }//end of menu buttons================================================
+  
+  //programable buttons==================================================
+  if (mouseX > 100 && mouseX < 175 && mouseY > 20 && mouseY < 80) {
+      if (pg1 == false) {
+       pg1 = true;
+      } else {
+       pg1 = false; 
+      }
+  }
+  
+  if (mouseX > 200 && mouseX < 275 && mouseY > 20 && mouseY < 80) {
+     if (pg2 == false) {
+       pg2 = true;
+      } else {
+       pg2 = false; 
+      }
+  }
+  
+  if (mouseX > 300 && mouseX < 375 && mouseY > 20 && mouseY < 80) {
+     if (pg3 == false) {
+       pg3 = true;
+      } else {
+       pg3 = false; 
+      }
+  }
+  
+  if (mouseX > 400 && mouseX < 475 && mouseY > 20 && mouseY < 80) {
+     if (pg4 == false) {
+       pg4 = true;
+      } else {
+       pg4 = false; 
+      }
+  }
+  
+  if (mouseX > 500 && mouseX < 575 && mouseY > 20 && mouseY < 80) {
+     if (pg5 == false) {
+       pg5 = true;
+      } else {
+       pg5 = false; 
+      }
+  }
+  //end of programable buttons==================================================
   
   controlslider();
   
