@@ -11,6 +11,7 @@ color darkpurple = #610F98;
 color royalblue  = #5A1FFF;
 color velvet     = #684FFC;
 color blue       = #364BFF;
+color lavender   = #7251D8;
 color selected   = #5A5A5A;
 color selectedcolor;
 
@@ -25,6 +26,21 @@ float shadeR;
 float memoryB;
 float memoryG;
 float memoryR;
+float memoryBp1;
+float memoryGp1;
+float memoryRp1;
+float memoryBp2;
+float memoryGp2;
+float memoryRp2;
+float memoryBp3;
+float memoryGp3;
+float memoryRp3;
+float memoryBp4;
+float memoryGp4;
+float memoryRp4;
+float memoryBp5;
+float memoryGp5;
+float memoryRp5;
 float thickstroke;
 boolean pg1;
 boolean pg2;
@@ -48,11 +64,26 @@ void setup() {
   memoryR = 0;
   memoryG = 0;
   memoryB = 0;
-  pg1 = false;
-  pg2 = false;
-  pg3 = false;
-  pg4 = false;
-  pg5 = false;
+  memoryRp1 = 0;
+  memoryGp1 = 0;
+  memoryBp1 = 0;
+  memoryRp2 = 0;
+  memoryGp2 = 0;
+  memoryBp2 = 0;
+  memoryRp3 = 0;
+  memoryGp3 = 0;
+  memoryBp3 = 0;
+  memoryRp4 = 0;
+  memoryGp4 = 0;
+  memoryBp4 = 0;
+  memoryRp5 = 0;
+  memoryGp5 = 0;
+  memoryBp5 = 0;
+  pg1 = true;
+  pg2 = true;
+  pg3 = true;
+  pg4 = true;
+  pg5 = true;
   fill(255);
   rect(0, 0, 1200, 800);
 }
@@ -90,23 +121,23 @@ void draw() {
   circle(275,690,50);
   
   tactile(350,690,25);  
-  fill(purple);
+  fill(darkpurple);
   circle(350,690,50);
   
   tactile(125,760,25);  
-  fill(purple);
+  fill(blue);
   circle(125,760,50);
   
   tactile(200,760,25);  
-  fill(purple);
+  fill(royalblue);
   circle(200,760,50);
   
   tactile(275,760,25);  
-  fill(purple);
+  fill(velvet);
   circle(275,760,50);
   
   tactile(350,760,25);  
-  fill(purple);
+  fill(lavender);
   circle(350,760,50);
   
   //menu buttons=============================
@@ -137,28 +168,50 @@ void draw() {
   //end of menu buttons==========================
   
   //programable buttons===================================
-  rectangle(100,175,20,80); 
-  fill(255);
+   
+  if(pg1 == false) {
+    rectangle(100,175,20,80);
+  } else {
+    stroke(selected); 
+  }
+  fill(memoryRp1,memoryGp1,memoryBp1);
   rect(100,20,75,60);
-  
-  rectangle(200,275,20,80); 
-  fill(255);
+
+  if(pg2 == false) {
+    rectangle(200,275,20,80);
+  } else {
+    stroke(selected); 
+  }
+  fill(memoryRp2,memoryGp2,memoryBp2);
   rect(200,20,75,60);
   
-  rectangle(300,375,20,80); 
-  fill(255);
+  if(pg3 == false) {
+    rectangle(300,375,20,80);
+  } else {
+    stroke(selected); 
+  }
+  fill(memoryRp3,memoryGp3,memoryBp3);
   rect(300,20,75,60);
-  
-  rectangle(400,475,20,80); 
-  fill(255);
+   
+  if(pg4 == false) {
+    rectangle(400,475,20,80);
+  } else {
+    stroke(selected); 
+  }
+  fill(memoryRp4,memoryGp4,memoryBp4);
   rect(400,20,75,60);
   
-  rectangle(500,575,20,80); 
-  fill(255);
+  if(pg5 == false) {
+    rectangle(500,575,20,80);
+  } else {
+    stroke(selected); 
+  }
+  fill(memoryRp5,memoryGp5,memoryBp5);
   rect(500,20,75,60);
   //end ofprogramable buttons===================================
   
   //devider line============
+  stroke(0);
   line(600, 15, 600, 85);
   //end of devider line============
   
@@ -203,6 +256,39 @@ void draw() {
   line(40, thick, 40, 550);
   circle(40, thick, 30);
   
+  //PG button works
+  if(pg1 == true) {
+     memoryRp1 = shadeR;
+     memoryGp1 = shadeG;
+     memoryBp1 = shadeB;
+  }
+  
+  if(pg2 == true) {
+     memoryRp2 = shadeR;
+     memoryGp2 = shadeG;
+     memoryBp2 = shadeB;
+  }
+  
+  if(pg3 == true) {
+     memoryRp3 = shadeR;
+     memoryGp3 = shadeG;
+     memoryBp3 = shadeB;
+  }
+  
+  if(pg4 == true) {
+     memoryRp4 = shadeR;
+     memoryGp4 = shadeG;
+     memoryBp4 = shadeB;
+  }
+  
+  if(pg5 == true) {
+     memoryRp5 = shadeR;
+     memoryGp5 = shadeG;
+     memoryBp5 = shadeB;
+  }
+  
+  //end pf PG button works
+  
   //text
   
   fill(0);
@@ -245,35 +331,51 @@ void mouseReleased() {
   
  //circle buttons
   if (dist(125,690,mouseX,mouseY) < 50) {
-    selectedcolor = magenta;
+     sliderR = map(242, 0, 255, 450, 750);
+     sliderG = map(83, 0, 255, 450, 750);
+     sliderB = map(242, 0, 255, 450, 750);
   }
   
   if (dist(200,690,mouseX,mouseY) < 50) {
-    selectedcolor = violet;
+     sliderR = map(123, 0, 255, 450, 750);
+     sliderG = map(10, 0, 255, 450, 750);
+     sliderB = map(255, 0, 255, 450, 750);
   }
   
   if (dist(275,690,mouseX,mouseY) < 50) {
-    selectedcolor = purple;
+     sliderR = map(157, 0, 255, 450, 750);
+     sliderG = map(13, 0, 255, 450, 750);
+     sliderB = map(255, 0, 255, 450, 750);
   }
   
   if (dist(350,690,mouseX,mouseY) < 50) {
-    selectedcolor = purple;
+     sliderR = map(97, 0, 255, 450, 750);
+     sliderG = map(15, 0, 255, 450, 750);
+     sliderB = map(152, 0, 255, 450, 750);
   }
   
   if (dist(125,760,mouseX,mouseY) < 50) {
-    selectedcolor = magenta;
+     sliderR = map(54, 0, 255, 450, 750);
+     sliderG = map(75, 0, 255, 450, 750);
+     sliderB = map(255, 0, 255, 450, 750);
   }
   
   if (dist(200,760,mouseX,mouseY) < 50) {
-    selectedcolor = violet;
+     sliderR = map(90, 0, 255, 450, 750);
+     sliderG = map(31, 0, 255, 450, 750);
+     sliderB = map(255, 0, 255, 450, 750);
   }
   
   if (dist(275,760,mouseX,mouseY) < 50) {
-    selectedcolor = purple;
+     sliderR = map(104, 0, 255, 450, 750);
+     sliderG = map(79, 0, 255, 450, 750);
+     sliderB = map(252, 0, 255, 450, 750);
   }
   
   if (dist(350,760,mouseX,mouseY) < 50) {
-    selectedcolor = purple;
+     sliderR = map(114, 0, 255, 450, 750);
+     sliderG = map(81, 0, 255, 450, 750);
+     sliderB = map(216, 0, 255, 450, 750);
   } // end of circle buttons
   
   //menu buttons=========================================================
@@ -315,15 +417,23 @@ void mouseReleased() {
   //programable buttons==================================================
   if (mouseX > 100 && mouseX < 175 && mouseY > 20 && mouseY < 80) {
       if (pg1 == false) {
-       pg1 = true;
+       pg1 = true; 
+       sliderR = map(memoryRp1, 0, 255, 450, 750);
+       sliderG = map(memoryGp1, 0, 255, 450, 750);
+       sliderB = map(memoryBp1, 0, 255, 450, 750);
       } else {
-       pg1 = false; 
+       pg1 = false;
       }
   }
+  
+  print(pg1);
   
   if (mouseX > 200 && mouseX < 275 && mouseY > 20 && mouseY < 80) {
      if (pg2 == false) {
        pg2 = true;
+       sliderR = map(memoryRp2, 0, 255, 450, 750);
+       sliderG = map(memoryGp2, 0, 255, 450, 750);
+       sliderB = map(memoryBp2, 0, 255, 450, 750);
       } else {
        pg2 = false; 
       }
@@ -332,6 +442,9 @@ void mouseReleased() {
   if (mouseX > 300 && mouseX < 375 && mouseY > 20 && mouseY < 80) {
      if (pg3 == false) {
        pg3 = true;
+       sliderR = map(memoryRp3, 0, 255, 450, 750);
+       sliderG = map(memoryGp3, 0, 255, 450, 750);
+       sliderB = map(memoryBp3, 0, 255, 450, 750);
       } else {
        pg3 = false; 
       }
@@ -340,6 +453,9 @@ void mouseReleased() {
   if (mouseX > 400 && mouseX < 475 && mouseY > 20 && mouseY < 80) {
      if (pg4 == false) {
        pg4 = true;
+       sliderR = map(memoryRp4, 0, 255, 450, 750);
+       sliderG = map(memoryGp4, 0, 255, 450, 750);
+       sliderB = map(memoryBp4, 0, 255, 450, 750);
       } else {
        pg4 = false; 
       }
@@ -348,6 +464,9 @@ void mouseReleased() {
   if (mouseX > 500 && mouseX < 575 && mouseY > 20 && mouseY < 80) {
      if (pg5 == false) {
        pg5 = true;
+       sliderR = map(memoryRp5, 0, 255, 450, 750);
+       sliderG = map(memoryGp5, 0, 255, 450, 750);
+       sliderB = map(memoryBp5, 0, 255, 450, 750);
       } else {
        pg5 = false; 
       }
@@ -383,7 +502,7 @@ void controlslider() {
   
   shadeR = map(sliderR, 450, 750, 0, 255);
   
-  thickstroke = map(thick, 250, 550, 50, 0);
+  thickstroke = map(thick, 250, 550, 55, 0);
 }
 
 void mouseDragged() {
