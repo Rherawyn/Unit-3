@@ -524,11 +524,11 @@ void mouseReleased() {
   }
 
   if (mouseX > 1110 && mouseX < 1185 && mouseY > 675 && mouseY < 710) {
-    //
+    selectOutput("Choose a name for you saved image", "saveimage");
   }
 
   if (mouseX > 1110 && mouseX < 1185 && mouseY > 730 && mouseY < 775) {
-    //
+    selectInput("Select an image to import", "importimage");
   }//end of menu buttons================================================
 
   //stamps
@@ -699,6 +699,28 @@ void mouseReleased() {
 
   controlslider();
 } //end of mouse click =================================================
+
+//save and load buttons
+void saveimage(File f) {
+  if (f != null) {
+    PImage canvas = get(83, 103, 1035, 545);
+    canvas.save(f.getAbsolutePath());
+  }
+}
+
+void importimage(File f) {
+  if (f != null) {
+    //KLUDGE
+    int n = 0;
+    while (n < 10) {
+      PImage pic = loadImage(f.getPath());
+      image(pic, 83, 103);
+      n = n + 1;
+    }
+  }
+}
+
+// end of save and load buttons
 
 //slider stuff ========================================================
 
